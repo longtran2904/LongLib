@@ -1,0 +1,19 @@
+/* date = November 14th 2021 11:03 pm */
+
+REGISTER_ENUM(Unknown)
+
+REGISTER_ENUM(OpenParen)
+REGISTER_ENUM(Colon)
+REGISTER_ENUM(CloseParen)
+REGISTER_ENUM(Semicolon)
+REGISTER_ENUM(Asterisk)
+REGISTER_ENUM(OpenBracket)
+REGISTER_ENUM(CloseBracket)
+REGISTER_ENUM(OpenBrace)
+REGISTER_ENUM(CloseBrace)
+REGISTER_ENUM(Coma)
+
+REGISTER_ENUM(Identifier)
+REGISTER_ENUM(String)
+
+REGISTER_ENUM(EndOfStream)

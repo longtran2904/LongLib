@@ -1,0 +1,22 @@
+// string.h - string
+size_t strlen(const char *str);
+char * strcpy ( char * destination, const char * source );
+char * strncpy ( char * destination, const char * source, size_t num );
+int strcmp ( const char * str1, const char * str2 ); // < 0 when str1 < str2, == 0 when str1==str2, > 0 when str1 > str2
+int strncmp ( const char * str1, const char * str2, size_t num );
+
+// string.h - memory
+void * memcpy ( void * destination, const void * source, size_t num );
+void * memmove ( void * destination, const void * source, size_t num );
+void * memset ( void * ptr, int value, size_t num );
+int memcmp ( const void * ptr1, const void * ptr2, size_t num ); // < 0 when first byte of ptr1 < ptr2, and so on
+
+// stdio.h - printf
+//The "f" variants write output to a file instead of standard output.
+//The "s" variants write to a character array instead of standard output. Unfortunately the basic sprintf function has no overflow protection making it risky to use unless you have carefully calculated the maximum possible size (and not made any unwarranted assumptions in said calculation). snprintf adds a size limit.
+//The "v" variants take a va_list rather than taking varargs directly. They are usefull when writing a wrapper function that takes varargs from the user and passes them on to printf.
+//Return the total number of printed characters.
+int vsnprintf (char * s, size_t n, const char * format, va_list arg );
+
+// assert.h
+Assert failed when the value passed in is zero.

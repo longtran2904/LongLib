@@ -989,7 +989,7 @@ int main(void)
     Sprite* allBitmaps = LoadAllTextBitmap("C:/Windows/Fonts/arial.ttf", "Arial");
     
     int x = 0, y = 0;
-    float tX = 256, tY = 256;
+    float tX = 128, tY = 128;
     Vector2 dir = { 1, -1 };
     
     while (UpdateFrame())
@@ -1015,17 +1015,20 @@ int main(void)
         int posX = 0, posY= 0, lineHeight = 0;
         for (int i = 0; i < '~' - '!'; ++i)
         {
-            DrawSprite(allBitmaps[i], posX, posY);
-            //printf("Bitmap %c: (%u, %u)\n", (char)i + '!', allBitmaps[i].width, allBitmaps[i].height);
-            posX += allBitmaps[i].width;
-            if (allBitmaps[i].height > lineHeight)
-                lineHeight = allBitmaps[i].height;
-            if (posX > currentApp.windowWidth)
+            Sprite bitmap = allBitmaps[i];
+            
+            if (posX + bitmap.width> currentApp.windowWidth)
             {
                 posY += lineHeight;
-                lineHeight = allBitmaps[i].height;
                 posX = 0;
+                lineHeight = 0;
             }
+            
+            DrawSprite(bitmap, posX, posY);
+            posX += bitmap.width + 4;
+            
+            if (bitmap.height > lineHeight)
+                lineHeight = bitmap.height;
         }
         
         Shape rect = {
@@ -1044,17 +1047,12 @@ int main(void)
                     }, true, GOLD);
         
         DrawTexture(texture, tX, tY);
-        
-        if (tX == currentApp.windowWidth - texture.width + 1 || tX == 0)
-        {
+        if (tX > currentApp. windowWidth - texture.width || tX < 0)
             dir.x = -dir.x;
-        }
-        if (tY == currentApp.windowHeight - texture.height || tY == 0)
-        {
+        if (tY > currentApp.windowHeight - texture.height || tY < 0)
             dir.y = -dir.y;
-        }
-        tX += dir.x;
-        tY += dir.y;
+        tX += dir.x * 256 * deltaTime;
+        tY += dir.y * 256 * deltaTime;
     }
     
     ExitWindow();
